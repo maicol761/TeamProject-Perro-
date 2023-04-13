@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CommentMapper">
+
+	<select id="commentListWithPaging" parameterType="hashMap"
+		resultType="comment">
+		select * from comment where pno=#{pno} order by comment_seq desc
+		limit #{criteria.sqlPage} , #{criteria.rowsPerPage}
+	</select>
+
+	<insert id="saveComment" parameterType="comment">
+		insert into comment(pno,content,writer,star)
+		values(#{pno},#{content},#{writer},#{star})
+	</insert>
+
+	<select id="countCommentList" resultType="int">
+		SELECT COUNT(*) FROM comment
+		WHERE pno=#{pno}
+	</select>
+
+	<select id="getCountR" resultType="int">
+		select count(*) from comment where pno=#{pno}
+	</select>
+
+	<select id="getStarAvg" resultType="String">
+		select avg(star) from comment where pno=#{pno}
+	</select>
+
+</mapper>
+

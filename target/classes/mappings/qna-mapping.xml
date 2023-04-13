@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="QnaMapper">
+	
+	<select id="qnaList" parameterType="hashMap" resultType="qVo">
+		select * from qtbl where mid like CONCAT('%',#{mid},'%') 
+		order by qno desc limit #{criteria.sqlPage} , #{criteria.rowsPerPage}
+	</select>
+	
+	<select id="qnaAllList" parameterType="hashMap" resultType="qVo">
+		select * from qtbl where acheck like CONCAT('%',#{acheck},'%')
+		order by qno desc limit #{criteria.sqlPage} , #{criteria.rowsPerPage}
+	</select>
+	
+	<select id="qnaCountMid" resultType="int">
+		select count(*) from qtbl where mid like CONCAT('%',#{mid},'%')
+	</select>
+	
+	<select id="qnaCount" resultType="int">
+		select count(*) from qtbl where acheck like CONCAT('%',#{acheck},'%')
+	</select>
+	
+	<select id="faqList" parameterType="hashMap" resultType="faqVo">
+		select * from faqtbl where catego like CONCAT('%',#{catego},'%') 
+		order by faqno desc
+	</select>
+	
+	<select id="qView" resultType="qVo">
+		select * from qtbl where qno=#{qno}
+	</select>
+	
+	<select id="aView" resultType="aVo">
+		select * from atbl where qno=#{qno}
+	</select>
+	
+	<insert id="insertQ" parameterType="qVO">
+		insert into qtbl(mid,catego,qtitle,qcontent) values(#{mid},#{catego},#{qtitle},#{qcontent})
+	</insert>
+	
+	<insert id="insertA" parameterType="aVO">
+		insert into atbl(qno,acontent) values(#{qno},#{acontent})
+	</insert>
+	
+	<select id="aCheck" resultType="int">
+		select count(*) from atbl where qno=#{qno}
+	</select>
+	
+	<update id="aUpdate" parameterType="qVO">
+		update qtbl set acheck='답변완료' where qno=#{qno}
+	</update>
+
+</mapper>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ProductMapper">
+
+
+	<!-- 모든상품조회 -->
+	<select id="getProductAllList" parameterType="hashMap" resultType="product">
+		SELECT * FROM producttbl where pname like CONCAT('%',#{pname},'%')
+		order by pno desc limit #{criteria.sqlPage} , #{criteria.rowsPerPage}
+	</select>
+	
+	<!-- 모든상품개수 -->
+	<select id="getProductAllCount" resultType="int">
+		SELECT count(*) FROM producttbl where pname like CONCAT('%',#{pname},'%')
+	</select>
+	
+	<!-- 카테고리별 상품 조회 -->
+	<select id="getProductCnoList" parameterType="hashMap" resultType="product">
+		SELECT * FROM producttbl where cno=${cno}
+		order by pno desc limit #{criteria.sqlPage} , #{criteria.rowsPerPage}
+	</select>
+	
+	<!-- 카테고리별 상품 개수 -->
+	<select id="getProductCnoCount" resultType="int">
+		SELECT count(*) FROM producttbl where cno=${cno}
+	</select>
+	
+	
+	
+	
+	
+	<!-- 상품 디테일 -->
+	<select id="getProductDetail" resultType="product">
+		SELECT * FROM producttbl WHERE pno=#{pno}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+
+	<select id="getProductList" resultType="product">
+		SELECT * FROM producttbl WHERE
+		cno=#{cno}
+	</select>
+
+	
+
+
+	<insert id="insertProduct" parameterType="product">
+		INSERT INTO
+		product(pno,pname,wprice,margin,qty,cno)
+		VLAUES(product_seq.pno,#{pname},#{wprice},#{margin},#{qty},#{cno})
+	</insert>
+
+	<select id="listProduct" parameterType="String"
+		resultType="product">
+		select pseq,regdate,name,price1,price2,useyn,bestyn
+      from product where name like CONCAT('%',#{pname},'%')
+      order by pseq desc
+	</select>
+
+</mapper>
+
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<typeAliases>
+		<typeAlias type="com.petshop.beauty.dto.ReservationVO"
+			alias="reservation" />
+		<typeAlias type="com.petshop.beauty.dto.DogVO" alias="dog" />
+		<typeAlias type="com.petshop.admin.dto.MemberVO"
+			alias="member" />
+		<typeAlias type="com.petshop.purchase.dto.ProductVO"
+			alias="product" />
+		<typeAlias type="com.petshop.beauty.dto.ServiceVO"
+			alias="service" />
+
+		<typeAlias type="com.petshop.beauty.dto.QVO" alias="qVo" />
+		<typeAlias type="com.petshop.beauty.dto.AVO" alias="aVo" />
+		<typeAlias type="com.petshop.beauty.dto.FaqVO" alias="faqVo" />
+		
+		<typeAlias type="com.petshop.purchase.dto.OrderResultViewVO" alias="orderresultVo" />
+
+		<typeAlias type="com.petshop.purchase.dto.OrderVO"
+			alias="order" />
+		<typeAlias type="com.petshop.purchase.dto.CartVO"
+			alias="cart" />
+
+		<typeAlias type="com.petshop.purchase.dto.CategoryVO"
+			alias="category" />
+			
+			<typeAlias type="com.petshop.admin.dto.ReservationListAllVO" alias="reListAll"/>
+	
+		<typeAlias type="com.petshop.beauty.dto.ReservationViewVO"
+			alias="RViewVO" />
+			
+			<typeAlias type="com.petshop.purchase.dto.CartViewVO" 
+			alias="cartview"/>
+
+		<typeAlias type="com.petshop.purchase.dto.ConfirmVO"
+			alias="confirm" />
+		<typeAlias type="com.petshop.purchase.dto.CommentVO"
+			alias="comment"/>
+	</typeAliases>
+
+	<!-- SQL 매핑파일 -->
+	<mappers>
+		<mapper resource="mappings/reservation-mapping.xml" />
+		<mapper resource="mappings/member-mapping.xml" />
+		<mapper resource="mappings/product-mapping.xml" />
+		<mapper resource="mappings/qna-mapping.xml" />
+		<mapper resource="mappings/admin-mapping.xml" />
+				<mapper resource="mappings/cart-mapping.xml" />
+		<mapper resource="mappings/purchase-mapping.xml" />
+			<mapper resource="mappings/order-mapping.xml" />
+		<mapper resource="mappings/confirmtbl-mapping.xml" />
+		<mapper resource="mappings/comment-mapping.xml" />
+	</mappers>
+
+</configuration>

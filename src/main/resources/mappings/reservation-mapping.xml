@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ReservationMapper">
+
+	<!-- 날짜 존재 여부 -->
+	<select id="getReservation" resultType="reservation">
+		select rtime,rteacher
+		from reservationtbl where rrdate=#{rrdate}
+	</select>
+
+	<!-- 예약 인설트 -->
+	<insert id="reservation" parameterType="reservation">
+		insert into
+		reservationtbl(mid,rrdate,rtime,rteacher,dogname,rphone,comment,rprice,dno,sno)
+		values(#{mid},#{rrdate},#{rtime},#{rteacher},#{dogname},#{rphone},#{comment},#{rprice},#{dno},#{sno})
+	</insert>
+
+	<!-- 이미 예약된 시간인지 체크 -->
+	<select id="reserCheck" resultType="reservation">
+		select * from reservationtbl
+		where rrdate=#{rrdate} and rtime=#{rtime} and
+		rteacher=#{rteacher};
+	</select>
+
+	<!-- 견종 카테고리 -->
+	<select id="dogList" resultType="dog">
+		select * from dogtbl
+	</select>
+	<!-- 서비스조회 -->
+	<select id="serviceList" resultType="service">
+		select * from servicetbl
+	</select>
+
+
+
+	<!-- 견종 상세조회 -->
+	<select id="dogDetail" resultType="dog">
+		select * from dogtbl where
+		dno=#{dno}
+	</select>
+	<!-- 견종 등록 -->
+	<insert id="dogInsert">
+		insert into dogtbl(dogweight,breed,dpay)
+		values(#{dogweight},#{breed},#{dpay})
+	</insert>
+	<!-- 견종 수정 -->
+	<update id="dogUpdate">
+		update dogtbl set dogweight=#{dogweight},
+		breed=#{breed},
+		dpay=#{dpay} where dno=#{dno}
+	</update>
+	<!-- 견종삭제 -->
+	<delete id="dogDelete">
+		delete from dogtbl where dno=#{dno}
+	</delete>
+	<!-- 서비스 상세조회 -->
+	<select id="serviceDetail" resultType="service">
+		select * from servicetbl
+		where
+		sno=#{sno}
+	</select>
+	<!-- 서비스 수정 -->
+	<update id="serviceUpdate">
+		update servicetbl set sname=#{sname}, spay=#{spay}
+		where sno=#{sno}
+	</update>
+	<!-- 서비스 삭제 -->
+	<delete id="serviceDelete">
+		delete from servicetbl where sno=#{sno}
+	</delete>
+	<!-- 서비스 등록 -->
+	<insert id="serviceInsert">
+		insert into servicetbl(sname, spay)
+		values(#{sname},#{spay})
+	</insert>
+
+
+
+	<!-- -->
+
+
+	<!-- 예약리스트(전체-mypage용) -->
+	<select id="reservationListAll" parameterType="hashMap"
+		resultType="reListAll">
+		select * from reservationListAll
+		where mid=#{mid}
+		order by rrdate desc,rtime desc
+		limit
+		#{criteria.sqlPage},#{criteria.rowsPerPage}
+	</select>
+	<select id="rAllcount" resultType="int">
+		select count(*) from
+		reservationListAll where mid=#{mid}
+	</select>
+
+
+
+	<!-- 예약리스트(미래-mypage용) -->
+	<select id="nowReservationListAll" parameterType="hashMap"
+		resultType="reListAll">
+		SELECT * FROM reservationListAll
+		where mid=#{mid} and rrdate>=NOW()
+		order by rrdate desc,rtime desc
+		limit #{criteria.sqlPage} , #{criteria.rowsPerPage}
+	</select>
+	<select id="rNowcount" resultType="int">
+		select count(*) from
+		reservationListAll where mid=#{mid} and rrdate>=NOW()
+	</select>
+
+
+
+	<!-- 예약리스트(과거-mypage용) -->
+	<select id="pastReservationListAll" parameterType="hashMap"
+		resultType="reListAll">
+		select * from reservationListAll
+		where mid=#{mid} and NOW()>=rrdate
+		order by rrdate desc,rtime desc
+		limit #{criteria.sqlPage} , #{criteria.rowsPerPage}
+	</select>
+	<select id="rPastcount" resultType="int">
+		select count(*) from
+		reservationListAll where mid=#{mid} and NOW()>=rrdate
+	</select>
+
+
+
+	<!-- -->
+	<!-- 예약리스트(전체) -->
+	<select id="rList" parameterType="hashMap"
+		resultType="reservation">
+		select * from reservationtbl rno order by mid desc
+		limit #{criteria.sqlPage} , #{criteria.rowsPerPage}
+	</select>
+
+	<select id="rCount" resultType="int">
+		select count(*) from reservationtbl
+	</select>
+
+
+	<!-- 예약삭제 -->
+	<delete id="reserDelete">
+		delete from reservationtbl where rno=#{rno}
+	</delete>
+
+	<select id="dogListPage" parameterType="hashMap"
+		resultType="dog">
+		select * from dogtbl order by breed desc
+		limit #{criteria.sqlPage} , #{criteria.rowsPerPage}
+	</select>
+	<select id="dCount" resultType="int">
+		select count(*) from dogtbl
+	</select>
+
+</mapper>

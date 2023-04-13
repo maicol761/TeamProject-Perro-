@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ConfirmMapping">
+
+	<select id="getConfirmAllList" parameterType="hashMap" resultType="confirm">
+		SELECT * FROM confirmtbl where mid like CONCAT('%',#{mid},'%')
+		order by cono desc limit #{criteria.sqlPage} , #{criteria.rowsPerPage}
+	</select>
+	
+	<select id="getConfirmAllCount" resultType="int">
+		SELECT count(*) FROM confirmtbl where mid like CONCAT('%',#{mid},'%')
+	</select>
+	
+	 <!-- 제품 판매 실적 조회 -->
+	 <!-- 테이블의 컬럼명과 VO 클래스의 멤버변수 이름이 틀린 경우 매핑 -->
+	 <resultMap type="com.petshop.purchase.dto.SalesQuantity" id="salesMap">
+	 	<result column="date" property="date"></result>
+	 	<result column="sales_count" property="quantity"></result>
+	 </resultMap>
+	 
+	<select id="listProductSales" resultMap="salesMap">
+		SELECT MONTH(codate) AS date, sum(copay) as 
+		sales_count FROM confirmtbl GROUP BY date order by date
+	</select>
+	
+	
+	<!-- 새로운 주문 생성 -->
+	<insert id="insertConfirm">
+	 	 INSERT INTO confirmtbl(mid,copay,coname) VALUES(#{mid},#{copay},#{coname})
+	</insert>
+	
+	<select id="getLastConfirm" resultType="int">
+		select cono from confirmtbl
+		where mid=#{mid} 
+		order by codate desc 
+		limit 0,1
+	</select>
+	
+	<update id="confirmUpdate">
+		update confirmtbl set result='처리완료' where cono=${cono}
+	</update>
+	
+	<select id="getConfirmNowList" parameterType="hashMap" resultType="confirm">
+		select * from confirmtbl where mid=#{mid} and result='주문처리중' order by cono desc 
+		limit #{criteria.sqlPage} , #{criteria.rowsPerPage}
+	</select>
+	
+	<select id="getConfirmNowCount" resultType="int">
+		SELECT count(*) FROM confirmtbl where mid=#{mid} and result='주문처리중'
+	</select>
+	
+	<select id="getConfirmPastList" parameterType="hashMap" resultType="confirm">
+		select * from confirmtbl where mid=#{mid} and result='처리완료' order by cono desc 
+		limit #{criteria.sqlPage} , #{criteria.rowsPerPage}
+	</select>
+	
+	<select id="getConfirmPastCount" resultType="int">
+		SELECT count(*) FROM confirmtbl where mid=#{mid} and result='처리완료'
+	</select>
+	
+	<select id="getConfirm" resultType="confirm">
+		select * from confirmtbl where cono=#{cono}
+	</select>
+	
+	<delete id="deleteConfirm">
+		delete from confirmtbl where cono=#{cono}
+	</delete>
+	
+
+	
+	
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="AdminMapper">
+	<select id="adminList" parameterType="hashMap" resultType="member">
+		select * from membertbl where
+		aposition=1 order by mid desc 
+		limit #{criteria.sqlPage} , #{criteria.rowsPerPage}  
+	</select>
+	<select id="adminDetail" resultType="member">
+		select * from membertbl
+		where mid=#{mid}
+	</select>
+	<delete id="adminDelete">
+		delete from membertbl where mid=#{mid}
+	</delete>
+	<update id="adminUpdate">
+		update membertbl set mname=#{mname}, mphone=#{mphone},
+			mpoint=#{mpoint}, maddr=#{maddr}, mcontent=#{mcontent},
+			email=#{email},	aposition=#{aposition}
+		where mid=#{mid}
+	<!--  
+		update membertbl set mname=#{mname} and
+		mphone=#{mphone}
+		and mpoint=#{mpoint} and maddr=#{maddr} and
+		mcontent=#{mcontent} and email=#{email} and
+		aposition=#{aposition}
+		where mid=#{mid}
+		-->
+	</update>
+	
+	<select id="adminCount" resultType="int">
+	select count(*) from membertbl where aposition=1;
+	</select>
+	
+	
+</mapper>
