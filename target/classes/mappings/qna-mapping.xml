@@ -38,7 +38,7 @@
 	</insert>
 	
 	<insert id="insertA" parameterType="aVO">
-		insert into atbl(qno,acontent) values(#{qno},#{acontent})
+		insert into atbl(qno,mid,acontent) values(#{qno},#{mid},#{acontent})
 	</insert>
 	
 	<select id="aCheck" resultType="int">

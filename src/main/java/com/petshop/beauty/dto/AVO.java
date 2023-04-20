@@ -16,5 +16,6 @@ public class AVO {
 	private int qno;
 	private String acontent;
 	private Date adate;
+	private String mid;
 
 }

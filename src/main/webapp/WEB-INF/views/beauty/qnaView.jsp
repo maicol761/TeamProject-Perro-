@@ -50,8 +50,8 @@
 		</tr>
 		<tr>
 		    <td>문의 내용<hr></td>
-			<td class="org_input" >
-				<textarea cols="50" rows="5" readonly>${qvo.qcontent }</textarea> 
+			<td>
+				${qvo.qcontent }<hr>
 			</td>
 		</tr>
 	</table>
@@ -70,8 +70,8 @@
 			
 			<tr>
 				<td>답변 내용</td>
-				<td class="org_input" >
-				<textarea cols="50" rows="5" readonly>${avo.acontent }</textarea> 
+				<td>
+				${avo.acontent }<hr>
 				</td>
 			</tr>
 		</table>

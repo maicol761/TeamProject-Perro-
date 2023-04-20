@@ -9,13 +9,12 @@ import com.petshop.beauty.dto.QVO;
 import utils.Criteria;
 
 public interface QnaService {
+	
 	//faq 리스트
 	List<FaqVO> getFaqList(String catego);
 
 	//질문 리스트
-	List<QVO> getQnaAllList(Criteria criteria,String acheck);
 	List<QVO> getQnaList(Criteria criteria,String mid);
-	int getQnaCount(String acheck);
 	int getQnaCountMid(String mid);
 	
 	//질문 조회
@@ -27,7 +26,5 @@ public interface QnaService {
 	AVO getAView(int qno);
 	
 	void insertQ(QVO vo);
-	void insertA(AVO vo);
-	
-	void aUpdate(int qno);
+
 }

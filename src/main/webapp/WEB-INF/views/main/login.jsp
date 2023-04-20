@@ -9,8 +9,6 @@
 <%@ include file ="../include/bHeader.jsp" %>
 
 
-
-
 <body>
  <div class="main">
  
@@ -53,7 +51,6 @@
           </div>
         </section>
           </div>
-        
         
 </body>
 

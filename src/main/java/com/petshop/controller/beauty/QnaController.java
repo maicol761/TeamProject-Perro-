@@ -48,9 +48,6 @@ public class QnaController {
      return "beauty/faqHome";
 	}
 	
-	
-	
-	
 	@GetMapping("qna_insert_home")
 	public String qnaInsertHome(){
 		return "beauty/qnaInsert";
@@ -60,33 +57,6 @@ public class QnaController {
 	public String qnaInsert(QVO vo) {
 		qnaService.insertQ(vo);
 		return "redirect:qna_Home";
-	}
-	
-	@GetMapping("qna_All_List")
-	public String qnaHome(Model model,Criteria criteria,QVO vo,
-			@RequestParam(value = "acheck", defaultValue = "") String acheck,
-			@RequestParam(value = "pageNum", defaultValue = "") String pageNum,
-	        @RequestParam(value = "rowsPerPage", defaultValue = "5") String rowsPerPage) {
-		   if(pageNum.length()==0) {
-			   pageNum="1";
-		  }
-		  int p = Integer.parseInt(pageNum);
-		  criteria.setPageNum(p);
-		  p=(p-1)*5; 
-		  criteria.setSqlPage(p); 
-		  criteria.setRowsPerPage(Integer.parseInt(rowsPerPage));
-	     // (1) 전체 상품목록 조회
-		 List<QVO> qnaAllList=qnaService.getQnaAllList(criteria,acheck);
-		 
-	     // (2) 화면에 표시할 페이지 버튼 정보 설정(PageMaker 클래스 이용)
-	     PageMaker pageMaker = new PageMaker();
-	     pageMaker.setCriteria(criteria); // 현재 페이지 정보 저장
-	     pageMaker.setTotalCount(qnaService.getQnaCount(acheck)); // 전체 게시글의 수 저장
-	     
-	     model.addAttribute("qnaAllList", qnaAllList);
-	     model.addAttribute("pageMaker", pageMaker);
-		
-		return "admin/qaOffer";
 	}
 	
 	@GetMapping("qna_Home")
@@ -157,19 +127,6 @@ public class QnaController {
 		
 		return "admin/qaOfferInsert";
 	}
-	
-	@PostMapping("a_insert")
-	public String aInsert(
-			@RequestParam(value = "qno") int qno,
-			AVO avo) {
-		
-		avo.setQno(qno);
-		qnaService.insertA(avo);
-		qnaService.aUpdate(qno);
-		
-		return "redirect:qna_All_List";
-	}
-	
 	
 
 }

@@ -23,16 +23,10 @@ public class QnaServiceImpl implements QnaService {
 		return qnaDao.faqList(catego);
 	}
 	
-	
 	@Override
 	public List<QVO> getQnaList(Criteria criteria, String mid) {
 		return qnaDao.qnaList(criteria, mid);
 	}
-	@Override
-	public int getQnaCount(String acheck) {
-		return qnaDao.qnaCount(acheck);
-	}
-
 
 	@Override
 	public QVO getQView(QVO vo) {
@@ -53,21 +47,10 @@ public class QnaServiceImpl implements QnaService {
 	public int getACheck(int qno) {
 		return qnaDao.aCheck(qno);
 	}
-	@Override
-	public List<QVO> getQnaAllList(Criteria criteria,String acheck) {
-		return qnaDao.qnaAllList(criteria,acheck);
-	}
+	
 	@Override
 	public int getQnaCountMid(String mid) {
 		return qnaDao.qnaCountMid(mid);
-	}
-	@Override
-	public void insertA(AVO vo) {
-		qnaDao.insertA(vo);
-	}
-	@Override
-	public void aUpdate(int qno) {
-		qnaDao.aUpdate(qno);
 	}
 	
 }

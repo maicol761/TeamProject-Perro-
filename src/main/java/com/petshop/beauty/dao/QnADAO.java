@@ -44,7 +44,7 @@ public class QnADAO{
 		return mybatis.selectList("QnaMapper.qnaAllList" ,map);
 	}
 	
-	//질문 개수
+	//총 질문 개수
 	public int qnaCount(String acheck) {
 		return mybatis.selectOne("QnaMapper.qnaCount",acheck);
 	}
@@ -74,10 +74,12 @@ public class QnADAO{
 		mybatis.insert("QnaMapper.insertQ", vo);
 	}
 	
+	//답변 등록
 	public void insertA(AVO vo) {
 		mybatis.insert("QnaMapper.insertA", vo);
 	}
 	
+	//질문 업데이트
 	public void aUpdate(int qno) {
 		mybatis.update("QnaMapper.aUpdate", qno);
 	}
