@@ -3,7 +3,7 @@
 <mapper namespace="QnaMapper">
 	
 	<select id="qnaList" parameterType="hashMap" resultType="qVo">
-		select * from qtbl where mid like CONCAT('%',#{mid},'%') 
+		select * from qtbl where mid=#{mid} 
 		order by qno desc limit #{criteria.sqlPage} , #{criteria.rowsPerPage}
 	</select>
 	
@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="qnaCountMid" resultType="int">
-		select count(*) from qtbl where mid like CONCAT('%',#{mid},'%')
+		select count(*) from qtbl where mid=#{mid}
 	</select>
 	
 	<select id="qnaCount" resultType="int">

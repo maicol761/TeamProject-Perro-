@@ -194,15 +194,9 @@
 				.test(document.getElementById("mpwd").value); //영문,특수문자
 		var check3 = /^(?=.*[^a-zA-Z0-9])(?=.*[0-9]).{8,12}$/.test(document
 				.getElementById("mpwd").value); //특수문자, 숫자
-
-		if (document.getElementById("mid2").value == "") {
-			alert("아이디를 입력해 주세요");
-			document.getElementById("mid2").focus();
-			return false;
-		}
 		
 		if (!(check1 || check2 || check3)) {
-			alert("비밀번호는 영문,숫자,특수문자 조합이어야합니다 8~12자");
+			alert("비밀번호는 영문,숫자 조합이어야합니다 8~12자");
 			return;
 		}
 		if (/(\w)\1\1/.test(document.getElementById("mpwd").value)) {

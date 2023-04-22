@@ -62,13 +62,37 @@
 //버튼눌렀을때 체크 할 것
 
 function go_Insert() {
+	
+	
+	
+	
+	
 	  var phone = document.getElementById("mphone").value;
 	   
 	   if(!(/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/.test(phone))){
 	       alert("제대로 입력해주세요(000-0000-0000)");
 	       document.getElementById("cophone").focus();
 	       return false;
-	   }else{
+	   }if (document.getElementById("mphone").value == "") {
+			alert("전화번호를 입력해 주세요");
+			document.getElementById("mphone").focus();
+			return false;
+	   }
+	   if (document.getElementById("mname").value == "") {
+			alert("이름을 입력해 주세요");
+			document.getElementById("mname").focus();
+			return false;
+		}
+		if (document.getElementById("sample6_address").value == "") {
+			alert("주소를 입력해 주세요");
+			document.getElementById("sample6_address").focus();
+			return false;
+		}
+		if (document.getElementById("sample6_address2").value == "") {
+			alert("상세주소를 입력해 주세요");
+			document.getElementById("sample6_address2").focus();
+			return false;
+		}else{
 		   var form = document.getElementById("basicUpdate");
 			form.action="basicUpdate";
 			form.submit();
@@ -82,8 +106,6 @@ function go_Insert() {
 	  var addr4 = document.getElementById("sample6_address2").value;
 
 	  document.getElementById("maddr").value = addr1+addr2+addr3+addr4;
-
-	  
 	  }
   
   </script>
